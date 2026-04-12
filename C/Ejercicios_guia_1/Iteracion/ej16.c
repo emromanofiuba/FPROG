@@ -27,7 +27,7 @@ int main()
             contador_par++;
        else if (ultimo_digito % 2 != 0)
             contador_impar++;
-    }
+     }
 
     printf("\n Cantidad de digitos pares: %hd", contador_par);
     printf("\n Cantidad de digitos impares: %hd \n", contador_impar);
