@@ -11,9 +11,13 @@ bool es_primo(int num)
     int i;
     bool primo = true;
 
-    for (i = 2; i <= num / 2 && primo; i++){
-        if (num % i == 0)
-            primo = false;
+    if (num == 1)
+        primo = false;
+    
+    else {
+        for (i = 2; i < num && primo; i++)
+            if (num % i == 0)
+                primo = false;
     }
 
     return primo;
@@ -21,7 +25,7 @@ bool es_primo(int num)
 
 void main()
 {
-    printf("¿El numero 22 es primo? ", es_primo(22));
+    printf("¿El numero 1 es primo? %d\n", es_primo(1));
 }
 
 
