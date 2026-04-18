@@ -15,7 +15,7 @@ bool es_primo(int num)
         primo = false;
     
     else {
-        for (i = 2; i < num && primo; i++)
+        for (i = 2; i < num / 2 && primo; i++)
             if (num % i == 0)
                 primo = false;
     }
