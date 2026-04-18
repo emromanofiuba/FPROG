@@ -1,0 +1,20 @@
+/* ALGORITMO DE RESOLUCION
+1. declarar variables num_padron, num_padron_mayor, num_padron_menor, nota_i, promedio, mayor_promedio, menor_promedio, suma_notas;
+    1.1 definir constante CANT_NOTAS 4
+2. inicializar variables
+    2.1 num_padron_mayor = num_padron_menor = num_padron
+    2.2 mayor_promedio = menor_promedio = promedio
+    2.3 pedir al usuario nota_1, nota_2, nota_3, nota_4 a traves de un for
+    2.4 " " " num_padron luego del for
+3. en un ciclo while nota_i >= 0, anidarle un for que se ejecute hasta que recorra las 4 notas, las sume, las promedie y las compare
+    3.1 suma_notas += nota_i
+    3.2 promedio = suma_notas / CANT_NOTAS
+    3.3 if promedio > mayor_promedio
+            mayor_promedio = promedio
+            num_padron_mayor = num_padron
+        else if promedio < menor_promedio
+            menor_promedio = promedio
+            num_padron_menor = num_padron
+4. mostrar mayor_promedio con num_padron_mayor y menor_promedio con num_padron_menor
+*/
+
