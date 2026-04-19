@@ -9,17 +9,18 @@ cuenta que un año bisiesto es aquel divisible por 4, salvo que sea divisible po
 # define MES_CON_30_DIAS 30
 # define MES_CON_31_DIAS 31
 # define FEBRERO_EN_AÑO_BISIESTO 29
+# define DIAS_FEBRERO 28
 
 int calcular_dias_mes(int mes, int año)
 {
     int dias;
 
-    if (año % 4 || año % 100 && año % 400){
+    if (año % 4 == 0 && año % 100 != 0 || (año % 400 == 0) ){
         if (mes == 2) 
             dias = FEBRERO_EN_AÑO_BISIESTO;
     }
     else if (mes == 2)
-        dias = 28;
+        dias = DIAS_FEBRERO;
 
     else if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12)
         dias = MES_CON_31_DIAS;
@@ -27,10 +28,28 @@ int calcular_dias_mes(int mes, int año)
     else if (mes == 4 || mes == 6 || mes == 9 || mes == 11)
         dias = MES_CON_30_DIAS;
 
+
     return dias;
 }
 
 void main()
 {
-    printf("Dias: %i\n",calcular_dias_mes(4, 2001));
+    int mes, año;
+
+    printf("Ingrese un mes: ");
+    scanf("%i", &mes);
+
+    if (mes < 1 || mes > 12)
+        printf("Mes inválido. No se puede calcular la cantidad de dias del mes\n");
+
+    else { 
+        printf("Ingrese un año: ");
+        scanf("%i", &año);
+
+        if (año < 1)
+            printf("Año inválido. No se puede calcular la cantidad de dias del mes\n");
+        else
+            printf("Mes: %i, Año: %i, Dias: %i\n", mes, año, calcular_dias_mes(mes, año));
+    }
+    
 }
