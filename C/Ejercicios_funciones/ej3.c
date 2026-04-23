@@ -12,7 +12,8 @@ Definición: El factorial de un entero positivo n,  se define como el producto d
 
     int calcular_factorial ( int numero )
     {
-        int factorial, numero, i, resultado;
+        int factorial, i, resultado;
+        factorial = 1;
         
         for (i = 1; i <= numero; i++)
             factorial *= i;
@@ -27,9 +28,9 @@ Definición: El factorial de un entero positivo n,  se define como el producto d
 
     int main()
     {
-        int factorial, numero, i, resultado;
-
-        resultado = calcular_factorial(-8);
-
+        printf("0! = %i\n", calcular_factorial(0));
+        printf("4! = %i\n", calcular_factorial(4));
+        printf("1! = %i\n", calcular_factorial(1));
+        printf("-2! = %i\n", calcular_factorial(-2));
     }
     

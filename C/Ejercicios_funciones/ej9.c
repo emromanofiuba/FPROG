@@ -7,9 +7,8 @@ fecha: 20140321 -> dia=21 mes=3 año=2014
 
 # include <stdio.h>
 
-void convertir_fecha(int *dia, int *mes, int *año)
+void convertir_fecha(long fecha, int *dia, int *mes, int *año)
 {
-    long fecha;
     int aux;
 
     *año = fecha / 10000;
@@ -28,7 +27,7 @@ void main()
     printf("Ingrese una fecha en formato aaaammdd: ");
     scanf("%ld", &fecha);
 
-    convertir_fecha(&dia, &mes, &año);
+    convertir_fecha(fecha, &dia, &mes, &año);
 
     printf("dia=%i mes=%i año=%i\n", dia, mes, año);
 }
