@@ -4,7 +4,8 @@ long pedir_fecha(){
     long fecha;
 
     printf("escribi la fecha wachin: ");
-    scanf("%d", &fecha);
+    scanf("%ld", &fecha);
+
     return fecha;
 }
 
@@ -69,6 +70,6 @@ void main(){
         fecha_2 = revertir_fecha(fecha_2);
     }
 
-    printf("la fehca anterior es: %ld", comparar_fechas(&fecha_1, &fecha_2));  
+    printf("la fecha anterior es: %ld\n", comparar_fechas(&fecha_1, &fecha_2));  
 
 }
