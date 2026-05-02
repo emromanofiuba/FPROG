@@ -21,7 +21,6 @@ bool es_multiplo(int num, int divisor)
 
 int cant_multiplos(int num, int *cant_multiplos_2, int *cant_multiplos_3, int *cant_multiplos_5, int *cant_multiplos_7)
 {
-
     if (es_multiplo(num, 2))
         (*cant_multiplos_2)++;
 
@@ -33,8 +32,6 @@ int cant_multiplos(int num, int *cant_multiplos_2, int *cant_multiplos_3, int *c
     
     if (es_multiplo(num, 7))
         (*cant_multiplos_7)++;
-
-    return num;
 }
 
 void main()

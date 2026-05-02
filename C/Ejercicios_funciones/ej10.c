@@ -46,6 +46,4 @@ void main()
         printf("Valor ingresado inválido\n");
     else
         printf("\nResultado: Dias: %i, Horas: %i, Minutos: %i, Segundos: %i\n", dias, horas, minutos, segundos);
-
-
 }

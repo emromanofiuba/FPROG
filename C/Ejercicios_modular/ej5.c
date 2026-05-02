@@ -15,7 +15,7 @@ primos.
 # include <stdbool.h>
 
 
-bool secuencia_primos(int numero)
+bool secuencia_enteros(int numero)
 {
     int divisor;
     bool es_primo = true;
@@ -33,7 +33,7 @@ bool secuencia_primos(int numero)
 
 void cantidad_y_suma(int numero, int *cantidad_primos, int *suma_primos)
 {
-     if (secuencia_primos(numero) == true){
+     if (secuencia_enteros(numero) == true){
         (*cantidad_primos)++;
         (*suma_primos) += numero;
     }
