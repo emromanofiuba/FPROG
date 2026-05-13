@@ -4,7 +4,7 @@ cortarla con un numero negativo y mostrar la cantidad de veces que se ingreso ca
 */
 
 # include <stdio.h>
-# define MAX 10
+# define MAX 1000
 typedef int tvec_cont[MAX];
 
 
@@ -18,7 +18,7 @@ void ingresar_numeros(tvec_cont contador)
 {
     int numero;
 
-    printf("Ingrese un numero del 0 al 10 (num negativo para terminar): ");
+    printf("Ingrese un numero del 0 al 999 (num negativo para terminar): ");
     scanf("%i", &numero);
 
     while (numero >= 0){
