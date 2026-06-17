@@ -26,14 +26,10 @@ void cargar_libros(t_libros libros[TAMANIO], int *ml) {
 
     while (*ml < TAMANIO && libros[*ml].codigo != 0) {
         printf("Titulo: ");
-        scanf(" ");
-        fgets(libros[*ml].titulo, 20, stdin);
-        libros[*ml].titulo[strcspn(libros[*ml].titulo, "\n")] = '\0';
+        scanf("%s", libros[*ml].titulo);
 
         printf("Autor: ");
-        scanf(" ");
-        fgets(libros[*ml].autor, 15, stdin);
-        libros[*ml].autor[strcspn(libros[*ml].autor, "\n")] = '\0';
+        scanf("%s", libros[*ml].autor);
 
         printf("Stock: ");
         scanf("%i", &libros[*ml].stock);
@@ -44,7 +40,7 @@ void cargar_libros(t_libros libros[TAMANIO], int *ml) {
         (*ml)++;
 
 
-        printf("\nCodigo del %i° libro, o para salir: ", *ml+1);
+        printf("\nCodigo del %i° libro, 0 para salir: ", *ml+1);
         scanf("%i", &libros[*ml].codigo);
     }
 }
@@ -74,15 +70,15 @@ void ordenar_por_codigo(t_libros libros[TAMANIO], int ml)
     int i, j;
     t_libros aux;
     bool hubo_intercambio = true;
-    i = 0;
+    i = 1;
 
-    while (i <= ml && hubo_intercambio) {
-        hubo_intercambio = false;
+    while (i < ml && hubo_intercambio) {
+        hubo_intercambio = false; //cada paso empieza sin cambios
         for (j = 0; j < ml - i; j++)
-            if (libros[i].codigo > libros[i+1].codigo) {
-                aux = libros[i];
-                libros[i] = libros[i+1];
-                libros[i+1] = aux;
+            if (libros[j].codigo > libros[j+1].codigo) {
+                aux = libros[j];
+                libros[j] = libros[j+1];
+                libros[j+1] = aux;
                 hubo_intercambio = true;
             }
         i++;

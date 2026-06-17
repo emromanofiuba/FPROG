@@ -16,16 +16,10 @@ void cargar_datos(t_alumno alumno[TAMANIO])
     for (int i=0; i < TAMANIO; i++) {
         printf("\n--ALUMNO[%i]--\n", i+1);
 
-        printf("Nombre: ");
+        printf("Nombre, Padron, Nota 1, Nota 2:  ");
         scanf("%s", alumno[i].nombre);
-        
-        printf("Padron: ");
         scanf("%i", &alumno[i].padron);
-
-        printf("Nota 1: ");
         scanf("%i", &alumno[i].notas[0]);
-
-        printf("Nota 2: ");
         scanf("%i", &alumno[i].notas[1]);
 
         alumno[i].promedio = (float)(alumno[i].notas[0] + alumno[i].notas[1]) / 2;
