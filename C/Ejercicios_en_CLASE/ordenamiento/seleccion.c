@@ -11,7 +11,7 @@ void seleccion(t_vec vector, int ml)
         posicion_min = i;
         
         for (j = i+1; j < ml; j++) {
-            if (vector[j] < vector[i]) 
+            if (vector[j] < vector[posicion_min]) 
                 posicion_min = j;
 
         aux = vector[posicion_min];

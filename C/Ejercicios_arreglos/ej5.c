@@ -34,21 +34,25 @@ void ingreso_datos(t_vec vector, int mf, int *ml)
 }
 
 
-void obtener_mayor(t_vec vector, int ML, float *max, int *posicion_max, int *contador)
+void obtener_maximo(t_vec vector, int ML, float *max)
 {
     *max = vector[0];
-    *posicion_max = 0;
-    *contador = 0;
 
     for (int i = 1; i < ML; i++) {
-        if (vector[i] > *max){
+        if (vector[i] > *max)
             *max = vector[i];
-            *posicion_max = i;
-            *contador = 1;
-        }
-        else if (vector[i] == *max)
+    }
+}
+
+void obtener_posiciones_y_cantidades(t_vec vector, int ml, float max, int *contador)
+{
+    int i;
+    *contador = 0;
+    for (i = 0; i < ml; i++)
+        if (vector[i] == max) {
             (*contador)++;
-    }   
+            printf("\t%i", i);
+        }
 }
 
 
@@ -60,10 +64,11 @@ int main(void)
 
     ingreso_datos(vector, MAX, &ml);
 
-    obtener_mayor(vector, ml, &max, &posicion_max, &contador);
+    obtener_maximo(vector, ml, &max);
 
-    printf("\n mayor componente del vector: %.2f", max);
-    printf("\n posicion donde este se encuentra: %i\n", posicion_max);
+    printf("\n mayor componente del vector: %.2f\n", max);
+    printf("max se encuentra en la posicion/es");
+    obtener_posiciones_y_cantidades(vector, ml, max, &contador);
     printf("\n cantidad de veces que aparece: %i\n", contador);
 
     

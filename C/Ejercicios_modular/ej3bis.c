@@ -41,7 +41,7 @@ long revertir_fecha(long fecha){
 long comparar_fechas(long *fecha_1, long *fecha_2){
     long fecha_anterior = *fecha_2;
     
-    if (*fecha_1 < *fecha_2)
+    if (*fecha_1 < fecha_anterior)
         fecha_anterior = *fecha_1;
     else if (*fecha_1 == *fecha_2)
         fecha_anterior == 0;
@@ -59,10 +59,12 @@ void main(){
 
     if (caso == 1){
         fecha_1 = fechas_separadas();
-        fecha_2 = fechas_separadas();}
+        fecha_2 = fechas_separadas();
+    }
     else if(caso == 2){
         fecha_1 = pedir_fecha();
-        fecha_2 = pedir_fecha();}
+        fecha_2 = pedir_fecha();
+    }
     else{
         fecha_1 = pedir_fecha();
         fecha_1 = revertir_fecha(fecha_1);

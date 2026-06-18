@@ -14,7 +14,6 @@ typedef float t_vec[MF];
 void ingreso_positivos(t_vec vector, int mf, int *ml)
 {
     *ml = 0;
-    int i = 0;
     float numero;
 
     printf("Ingrese un numero real positivo: ");
@@ -22,16 +21,14 @@ void ingreso_positivos(t_vec vector, int mf, int *ml)
 
     while (numero != 0 && *ml < mf) {
        if (numero > 0) {
-            vector[i] = numero;
+            vector[*ml] = numero;
             (*ml)++;
-            i++;
+        }
+        else {
+            printf("Debe ingresar un numero real positivo: ");
+        }
         printf("Ingrese otro numero real positivo: ");
         scanf("%f", &numero);
-       }
-       else {
-            printf("Debe ingresar un numero real positivo: ");
-            scanf("%f", &numero);
-        }
     }
 }
 

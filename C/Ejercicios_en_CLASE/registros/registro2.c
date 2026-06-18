@@ -73,7 +73,7 @@ void ordenar_por_codigo(t_libros libros[TAMANIO], int ml)
     i = 1;
 
     while (i < ml && hubo_intercambio) {
-        hubo_intercambio = false; //cada paso empieza sin cambios
+        hubo_intercambio = false; 
         for (j = 0; j < ml - i; j++)
             if (libros[j].codigo > libros[j+1].codigo) {
                 aux = libros[j];

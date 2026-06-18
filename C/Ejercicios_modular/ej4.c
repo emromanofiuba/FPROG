@@ -1,26 +1,59 @@
-/* PROBLEMA
-Dada una fecha en formato aaaammdd, verificar si es correcta.
-Si lo es, informarla según “dd de cccc de aaaa”.
-Si no lo es, mostrar un mensaje de error acorde.
-cccc es la cadena de caracteres correspondiente al mes mm.
-Ejemplo 1:
-fecha = 19910123
-“23 de enero de 1991”
-Ejemplo 2:
-fecha = 19910231
-“error fecha inválida”
-*/
+#include <stdio.h>
+#include <stdbool.h>
 
+long ingreso_fecha() //20210912
+{
+    long fecha;
+    printf("Ingrese una fecha en formato aaaammdd: ");
+    scanf("%ld", &fecha);
 
-# include <stdio.h>
+    return fecha;
+}
 
-void descomprimir_fecha(long fecha, int *año, int *mes, int *dia){
+void procesar_fecha(long fecha, int *anio, int *mes, int *dia)
+{
     int aux;
+    *anio = fecha / 10000;
+    aux = fecha / 100;
+    *mes = aux % 100;
+    *dia = fecha % 100;
+}
+
+bool validar_dia_segun_mes (int dia, int mes)
+{
+    bool fecha_validada = false;
+    if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+        if (dia >= 1 && dia <= 31)
+            fecha_validada = true;
+    }
+    else if (mes == 4 || mes == 6 || mes == 9 || mes == 11)
+        if (dia >= 1 && dia <= 30)
+            fecha_validada = true;
+    else if (mes == 2)
+        if (dia >= 1 && dia <= 28)
+            fecha_validada = true;
     
-    *año = fecha / 10000;
+    return fecha_validada;
 
-    aux = fecha % 10000;
+}
 
-    *mes = aux / 100;
-    *dia = aux % 100;
+void validar_fecha(int anio, int mes, int dia)
+{
+    if (anio >= 0)
+        if (validar_dia_segun_mes(dia, mes))
+            printf("%.2i/%.2i/%i\n", dia, mes, anio);
+        else 
+            printf("error, fecha invalida\n");
+    else 
+        printf("error, el año no existe\n");
+    
+}
+
+void main() {
+    long fecha;
+    int anio, mes, dia;
+
+    fecha = ingreso_fecha();
+    procesar_fecha(fecha, &anio, &mes, &dia);
+    validar_fecha(anio, mes, dia);
 }

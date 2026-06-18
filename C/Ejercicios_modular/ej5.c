@@ -33,7 +33,7 @@ bool secuencia_enteros(int numero)
 
 void cantidad_y_suma(int numero, int *cantidad_primos, int *suma_primos)
 {
-     if (secuencia_enteros(numero) == true){
+     if (secuencia_enteros(numero)){
         (*cantidad_primos)++;
         (*suma_primos) += numero;
     }

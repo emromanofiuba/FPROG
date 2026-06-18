@@ -42,21 +42,20 @@ void mostrar_resumen_atleta(int num, int edad, float marca)
 }
 
 
-void marca_global(int num, float marca, int *p_ganador, float *p_mejor_marca)
-{
-    if (marca > *p_mejor_marca) {
-        *p_mejor_marca = marca;
-        *p_ganador = num;
+void marca_global(int num, float marca, int *num_ganador, float *mejor_marca_global)
+{   
+    *num_ganador = num;
+    *mejor_marca_global = marca;
+    if (marca > *mejor_marca_global) {
+        *mejor_marca_global = marca;
+        *num_ganador = num;
     }
 }
 int main()
 {
     int i;
-    int num, fecha, edad;
+    int num, fecha, edad, num_ganador, mejor_marca_global;
     float marca_local;
-    
-    int num_ganador = 0;
-    float mejor_marca_global = 0.0;
 
     for (i = 1; i <= CANT_PARTICIPANTES; i++) {
         printf("\n--- Procesando Atleta %i ---\n", i);

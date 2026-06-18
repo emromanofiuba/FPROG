@@ -39,17 +39,17 @@ void main()
     printf("Ingrese un mes: ");
     scanf("%i", &mes);
 
-    if (mes < 1 || mes > 12)
-        printf("Mes inválido. No se puede calcular la cantidad de dias del mes\n");
+    while (mes < 1 || mes > 12) {
+        printf("Mes inválido. Ingrese uno valido\n");
+        scanf("%i", &mes);
+    } 
 
-    else { 
-        printf("Ingrese un año: ");
-        scanf("%i", &año);
+    printf("Ingrese un año: ");
+    scanf("%i", &año);
 
-        if (año < 1)
-            printf("Año inválido. No se puede calcular la cantidad de dias del mes\n");
-        else
-            printf("Mes: %i, Año: %i, Dias: %i\n", mes, año, calcular_dias_mes(mes, año));
+    if (año < 1)
+        printf("Año inválido. No se puede calcular la cantidad de dias del mes\n");
+    else
+        printf("Mes: %i, Año: %i, Dias: %i\n", mes, año, calcular_dias_mes(mes, año));
     }
     
-}

@@ -28,18 +28,23 @@ void ingreso_datos(t_vec vector, int mf, int *ml)
     }
 }
 
-void insertar_numero(t_vec vector, int *ml)
+int ingreso_nuevo_elemento(t_vec vector, int ml)
 {
     int p;
     printf("\nIngrese un numero para insertarlo al vector original: ");
     scanf("%i", &p);
+    return p;
+}
 
+void insertar_numero(t_vec vector, int p, int *ml)
+{
     int i = *ml - 1;
 
     while (i >= 0 && vector[i] > p) {
-        vector[i + 1] = vector[i];
-        i--;
-    }
+            vector[i + 1] = vector[i];
+            i--;
+        }
+    
     vector[i + 1] = p;
     (*ml)++;
 }
@@ -55,13 +60,15 @@ void mostrar_vector_resultante(t_vec vector, int ml)
 int main(void)
 {
     t_vec vector;
-    int ml;
+    int ml, mln, p;
 
     printf("A continuacion, debera ingresar una serie de numeros < 10\n");
     ingreso_datos(vector, MF, &ml);
 
-    if (ml <= MF)
-        insertar_numero(vector, &ml);
+    if (ml < MF) {
+        p = ingreso_nuevo_elemento(vector, ml);
+        insertar_numero(vector, p, &ml);
+    }
     else 
         printf("\nEl vector ha llegado a su capacidad máxima\n");
     

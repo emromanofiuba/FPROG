@@ -13,7 +13,7 @@ void cargar_matriz(t_matriz matriz, int *i, int *j)
     printf("Ingrese un valor (-1 para cambiar de fila, -2 para terminar): ");
     scanf("%i", &num);
 
-    while (num != -2) {
+    while (*i < MF && num != -2) {
         if (num == -1) {
             (*i)++;   // nueva fila
             *j = 0;   // resetear columna
