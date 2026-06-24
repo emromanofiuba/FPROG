@@ -4,11 +4,11 @@ typedef struct{
 	int padron;
 	char ape_nom[30];
 	float nota;
-}t_regAlumno;
+}t_alumno;
 
 void leer_archivo (FILE *ar_alumnos)
 {
-    t_regAlumno r_alumno;
+    t_alumno r_alumno;
 
     printf("\nPadron \t\tNombre Completo \tNota");
     fread(&r_alumno, sizeof(r_alumno), 1, ar_alumnos);

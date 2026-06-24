@@ -10,12 +10,12 @@ typedef struct{
 	int padron;
 	char ape_nom[30];
 	float nota;
-}t_regAlumno;
+}t_alumno;
 
 
 void cargar_archivo (FILE *ar_alumnos)
 {
-    t_regAlumno r_alumnos;
+    t_alumno r_alumnos;
 
     printf("Padron: ");
     scanf("%i", &r_alumnos.padron);
