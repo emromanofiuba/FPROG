@@ -11,13 +11,13 @@ typedef struct {
 
 typedef t_persona t_tabla[MAX_PERSONAS];
 
-int cargar_tabla(FILE *entrada, t_tabla tabla)
+int leer_tabla(FILE *entrada, t_tabla tabla)
 {
     int ml;
 
     ml = 0;
     fread(&tabla[ml], sizeof(t_persona), 1, entrada);
-    while (!feof(entrada)) {
+    while (!feof(entrada) && ml < MAX_PERSONAS) {
         ml++;
         fread(&tabla[ml], sizeof(t_persona), 1, entrada);
     }
@@ -60,13 +60,14 @@ void ordenar_por_seleccion(t_tabla tabla, int ml)
 
     for (i = 0; i < ml - 1; i++) {
         posicion_menor = i;
-        for (j = i + 1; j < ml; j++) {
+
+        for (j = i + 1; j < ml; j++) 
             if (comparar_personas(tabla[j], tabla[posicion_menor]) < 0) 
                 posicion_menor = j;
-            aux = tabla[posicion_menor];
-            tabla[posicion_menor] = tabla[j];
-            tabla[j] = aux;
-        }
+
+        aux = tabla[posicion_menor];
+        tabla[posicion_menor] = tabla[i];
+        tabla[i] = aux;
     }
 }
 
@@ -78,7 +79,7 @@ void grabar_tabla(FILE *salida, t_tabla tabla, int ml)
         fwrite(&tabla[i], sizeof(t_persona), 1, salida);
 }
 
-void procesar_archivos(void)
+int main(void)
 {
     FILE *entrada;
     FILE *salida;
@@ -91,7 +92,7 @@ void procesar_archivos(void)
     if (entrada == NULL || salida == NULL)
         printf("Error: no se pudieron abrir ambos archivos.\n");
     else {
-        ml = cargar_tabla(entrada, tabla);
+        ml = leer_tabla(entrada, tabla);
         ordenar_por_insercion(tabla, ml);
         grabar_tabla(salida, tabla, ml);
     }
@@ -100,11 +101,6 @@ void procesar_archivos(void)
         fclose(entrada);
     if (salida != NULL)
         fclose(salida);
-}
-
-int main(void)
-{
-    procesar_archivos();
 
     return 0;
 }

@@ -31,7 +31,7 @@ int encontrar_legajo(t_empleado empleados[TAMANIO], int ml, int legajo)
             posicion = -1;
         }
         else {
-            centro = inicio + (fin - inicio) / 2;
+            centro = inicio + ((fin - inicio) / 2);
             if (legajo == empleados[centro].legajo) {
                 terminado = true;
                 posicion = centro;

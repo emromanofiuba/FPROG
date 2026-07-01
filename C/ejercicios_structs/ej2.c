@@ -92,7 +92,6 @@ void mostrar_menu(void)
     printf("%i - Ordenar por antiguedad\n", OP_ANTIGUEDAD);
     printf("%i - Listar tabla\n", OP_LISTAR);
     printf("%i - Salir\n", OP_SALIR);
-    printf("Opcion: ");
 }
 
 void ordenar_por_nombre(t_empleado empleados[TAMANIO], int ml) //BURBUJEO MEJORADO
@@ -136,7 +135,7 @@ long comprimir_fecha(t_fecha fecha) {
     return fecha.anio * 10000 + fecha.mes *100 + fecha.dia;
 }
 
-void ordenar_por_edad(t_empleado empleados[TAMANIO], int ml, long fecha_nacimiento)
+void ordenar_por_edad(t_empleado empleados[TAMANIO], int ml)
 { //DE MAS JOVEN A MAS VIEJO
     int i, j;
     t_empleado aux;
@@ -160,6 +159,8 @@ void procesar_menu(t_empleado empleados[], int cant)
 
     while (seguir) {
         mostrar_menu();
+
+        printf("Opcion: ");
         scanf("%i", &opcion);
 
         switch (opcion) {

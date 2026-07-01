@@ -57,7 +57,7 @@ void listar_por_pantalla (t_venta ventas[TAMANIO], t_producto productos[TAMANIO]
 {
     int i;
     float monto_venta_prod, monto_total;
-    monto_total = 0;
+    monto_total = 0.0;
 
     for (i = 0; i < ml; i++) {
         monto_venta_prod = (float)ventas[i].cantidad_vendida_por_venta * productos[i].precio_unitario;

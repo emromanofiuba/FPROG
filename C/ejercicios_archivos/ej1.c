@@ -2,13 +2,9 @@
 
 long factorial(int numero)
 {
-    long resultado = 1;
-    int i;
-
-    for (i = 1; i <= numero; i++)
-        resultado *= i;
-
-    return resultado;
+    if (numero == 0)
+        return 1;
+    return numero * factorial(numero - 1);
 }
 
 void generar_factoriales(FILE *entrada, FILE *salida)
