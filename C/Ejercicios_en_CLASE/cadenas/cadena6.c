@@ -13,16 +13,15 @@ void cargar_palabras(t_palabras palabras, int *ml)
     
     printf("Desea ingresar una palabra? (s/n): ");
     scanf(" %c", &ingreso);
-    while (getchar() != '\n');
+    //while (getchar() != '\n');
 
     while (*ml < LIMITE_PAL && ingreso == 's') {
         printf("Ingrese una palabra: ");
         fgets(palabras[*ml], MAX_CHAR, stdin);
-        palabras[*ml][strlen(palabras[*ml]) - 1] = '\0';
+        palabras[*ml][strcspn(palabras[*ml], "\n")] = '\0';
 
         printf("\nDesea ingresar otra palabra? (s/n): ");
         scanf(" %c", &ingreso);
-        while (getchar() != '\n');
         (*ml)++;
     }
 }

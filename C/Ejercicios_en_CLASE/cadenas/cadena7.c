@@ -16,7 +16,6 @@ void cargar_palabras(t_palabras palabras, int *ml)
     
     printf("Desea ingresar una palabra? (s/n): ");
     scanf(" %c", &ingreso);
-    while (getchar() != '\n');
 
     while (*ml < LIMITE_PAL && ingreso == 's') {
         printf("Ingrese una palabra: ");
@@ -25,7 +24,6 @@ void cargar_palabras(t_palabras palabras, int *ml)
 
         printf("Desea ingresar otra palabra? (s/n): ");
         scanf(" %c", &ingreso);
-        while (getchar() != '\n');
         (*ml)++;
     }
 }

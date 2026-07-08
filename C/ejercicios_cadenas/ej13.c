@@ -3,10 +3,10 @@
 # include <string.h>
 # define MAX_CHAR 50
 # define LIMITE_ORACIONES 3
-typedef char t_oracion[LIMITE_ORACIONES][MAX_CHAR];
+typedef char t_oraciones[LIMITE_ORACIONES][MAX_CHAR];
 typedef char t_subcadena[MAX_CHAR];
 
-void cargar_oraciones(t_oracion oraciones)
+void cargar_oraciones(t_oraciones oraciones)
 {
     int i;
     for (i = 0; i < LIMITE_ORACIONES; i++){
@@ -16,27 +16,29 @@ void cargar_oraciones(t_oracion oraciones)
     }
 }
 
-void oracion_mas_larga(t_oracion oraciones, t_oracion mas_larga)
+void oracion_mas_larga(t_oraciones oraciones, t_subcadena mas_larga)
 {
     int i;
-    mas_larga = oraciones[0];
+    strcpy(mas_larga, oraciones[0]);
 
     for (i = 1; i < LIMITE_ORACIONES; i++)
-        if (strlen(oraciones[i]) > strlen(oraciones[i-1]))
-            mas_larga = oraciones[i];
+        if (strlen(oraciones[i]) > strlen(mas_larga))
+            strcpy(mas_larga, oraciones[i]);
 }
 
-bool hay_dos_iguales(t_oracion oraciones)
+bool hay_dos_iguales(t_oraciones oraciones)
 {
     bool hay_iguales = false;
-    int i = 1;
-
-    while (i < LIMITE_ORACIONES && !hay_iguales){
-        if (strcmp(oraciones[i], oraciones[i-1]) == 0)
-            hay_iguales = true;
+    int i, j;
+    while (i < LIMITE_ORACIONES - 1 && !hay_iguales) {
+        j = i + 1;
+        while(j < LIMITE_ORACIONES && !hay_iguales) {
+            if (strcmp(oraciones[i], oraciones[j]) == 0)
+                hay_iguales = true;
+            j++;
+        }
         i++;
     }
-
     return hay_iguales;
 }
 
@@ -47,23 +49,26 @@ void ingreso_subcadena(t_subcadena subcadena)
     subcadena[strlen(subcadena) - 1] = '\0';
 }
 
-void donde_esta_subcadena(t_oracion oraciones, t_subcadena subcadena, bool *esta_subcadena)
+bool esta_subcadena(t_subcadena oracion, t_subcadena subcadena)
 {
-    int i, j = 0;
-    *esta_subcadena = false;
+    return (strstr(oracion, subcadena) != NULL);
+}
 
-    for (i = 0; i < LIMITE_ORACIONES; i++)
-        if (strstr(oraciones[i], subcadena) != NULL) {
-            *esta_subcadena = true;
-            printf("La subcadena (%s) esta en la oracion (%s)\n", subcadena, oraciones[i]);
-        }
-    if (*esta_subcadena == false)
-        printf("La subcadena (%s) no se encuentra en ninguna oracion\n", subcadena);
+void informar_estado_subcadena(t_oraciones oraciones, t_subcadena subcadena)
+{
+    int i;
+    for (i = 0; i < LIMITE_ORACIONES; i++) {
+        if (esta_subcadena(oraciones[i], subcadena))
+            printf("La subcadena ('%s') esta en la oracion ('%s')\n", subcadena, oraciones[i]);
+        else 
+            printf("La subcadena no se encuentra en la oracion");
+    }
+
 }
 
 void main() {
-    t_oracion oraciones;
-    t_oracion mas_larga;
+    t_oraciones oraciones;
+    t_oraciones mas_larga;
     t_subcadena subcadena;
     bool esta_subcadena;
 

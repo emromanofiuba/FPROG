@@ -11,8 +11,7 @@ void ingreso_cadena(char cadena[], int tamanio)
 
     longitud = strlen(cadena);
 
-    if (longitud > 0 && cadena[longitud - 1] == '\n')
-        cadena[longitud - 1] = '\0';
+    cadena[strcspn(cadena, "\n")] = '\0';
 }
 
 bool es_cadena_numerica (char cadena[])
@@ -37,20 +36,19 @@ bool es_cadena_numerica (char cadena[])
 bool validar_clave(char cadena[])
 {
     int i;
-    char numero_ant, numero_pos;
-    bool es_valido;
+    bool es_valida;
 
     i = 0;
-    es_valido = false;
+    es_valida = false;
 
     if (es_cadena_numerica(cadena))
-        while ((cadena[i+1] != '\0') && (!es_valido)) {
+        while ((cadena[i+1] != '\0') && (!es_valida)) {
             if (cadena[i] != cadena[i+1]) 
-                es_valido = true;
+                es_valida = true;
             i++;
         }
     
-    return es_valido;
+    return es_valida;
 }
 
 void main()

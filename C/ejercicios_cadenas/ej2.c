@@ -1,21 +1,20 @@
 # include <stdio.h>
 # include <string.h>
+#include <stdbool.h>
 
 int cantidad_no_alfa(char *cadena)
 {
-   int i, j, no_alfa;
-    no_alfa = 0;
-   char letras[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    int i, cantidad;
+    bool alfa;
+    cantidad = 0;
 
    for (i = 0; i < strlen(cadena); i++) {
-        j = 0;
-        while ((cadena[i] != letras[j]) && (j < strlen(letras)))
-            j++;
-         if (letras[j] == '\0')
-                no_alfa++;
+        alfa = ((cadena[i] >= 'a' && cadena[i] <= 'z') || (cadena[i] >= 'A' && cadena[i] <= 'Z'));
+        if (!alfa)
+            cantidad++;
    }
 
-    return no_alfa;
+    return cantidad;
 }
 
 void main()

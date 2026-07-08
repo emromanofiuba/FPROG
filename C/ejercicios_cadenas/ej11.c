@@ -9,8 +9,8 @@ si esta ordenada la tabla, pedir los libros mas caros, los que menos se venden (
 # include <stdio.h>
 # include <stdbool.h>
 # include <string.h>
-# define MAX_CHAR 9
-# define LIMITE_PAL 9
+# define MAX_CHAR 21
+# define LIMITE_PAL 20
 typedef char t_palabras[LIMITE_PAL][MAX_CHAR];
 typedef char t_palabra[MAX_CHAR];
 
@@ -21,16 +21,14 @@ void cargar_palabras(t_palabras palabras, int *ml)
     
     printf("Desea ingresar una palabra? (s/n): ");
     scanf(" %c", &ingreso);
-    while (getchar() != '\n');
 
     while (*ml < LIMITE_PAL && ingreso == 's') {
         printf("Ingrese una palabra: ");
         fgets(palabras[*ml], MAX_CHAR, stdin);
-        palabras[*ml][strlen(palabras[*ml]) - 1] = '\0';
+        palabras[*ml][strcspn(palabras[*ml], "\n")] = '\0';
 
         printf("Desea ingresar otra palabra? (s/n): ");
         scanf(" %c", &ingreso);
-        while (getchar() != '\n');
         (*ml)++;
     }
 }
@@ -47,8 +45,8 @@ void palabra_mas_larga(t_palabras palabras, int ml, t_palabra mas_larga)
     strcpy(mas_larga, palabras[0]);
 
     for (i = 1; i < ml; i++) {
-        if (strlen(palabras[i]) > mas_larga)
-            mas_larga = palabras[i];
+        if (strlen(palabras[i]) > strlen(mas_larga))
+            strcpy(mas_larga, palabras[i]);
     }
 }
 
@@ -56,7 +54,7 @@ void pedir_palabra(t_palabra palabra)
 {
     printf("\nQue palabra desea buscar: ");
     fgets(palabra, MAX_CHAR, stdin);
-    palabra[strlen(palabra) - 1] = '\0';
+    palabra[strcspn(palabra, "\n")] = '\0';
 }
 
 void ordenar_palabras(t_palabras palabras, int ml)
@@ -79,26 +77,30 @@ void ordenar_palabras(t_palabras palabras, int ml)
 bool buscar_palabra(t_palabras palabras, int ml, t_palabra palabra)
 {
     int inicio, fin, centro;
-    bool encontrado;
+    int cmp;
+    bool terminado;
 
     inicio = 0;
     fin = ml - 1;
-    encontrado = false;
+    cmp = strcmp(palabra, palabras[centro]);
+    terminado = false;
 
-    while (!encontrado) {
-        centro = inicio + ((fin - inicio) / 2);
-        if (strcmp(palabras[centro], palabra) == 0)
-            encontrado = true;
-        else 
-            if (strcmp(palabra, palabras[centro]) < 0) {
-                fin = centro - 1;
-            }
-            else {
-                inicio = centro + 1;
-            }
+    if (strcmp(palabra, palabras[inicio]) < 0 || strcmp(palabra, palabras[fin]) > 0)
+        terminado = true;
+    else {
+        while (!terminado) {
+            centro = inicio + ((fin - inicio) / 2);
+            if (cmp == 0)
+                terminado = true;
+            else 
+                if (cmp < 0) 
+                    fin = centro - 1;
+                else 
+                    inicio = centro + 1;
+        }
     }
 
-    return encontrado;
+    return terminado;
 }
 
 
@@ -117,5 +119,7 @@ void main()
     ordenar_palabras(palabras, ml);
 
     pedir_palabra(palabra);
+
+    buscar_palabra(palabras, ml, palabra);
 
 }

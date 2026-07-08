@@ -3,14 +3,17 @@
 
 void mostrar_pares(int x)
 {    
-    if (x >= 1) {
-        if (x % 2 == 0) 
+    if (x >= 2) {
+        if (x % 2 == 0) {
             printf("%i\n", x);
-        mostrar_pares(x-1);
+            mostrar_pares(x-2);
+        }
+        else 
+            mostrar_pares(x-1);
     }
 }
 
 void main()
 {
-    mostrar_pares(11);
+    mostrar_pares(100);
 }
