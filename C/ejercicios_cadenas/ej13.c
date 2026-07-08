@@ -1,16 +1,17 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <string.h>
-# define MAX_CHAR 50
+# define MAX_CHAR 51
 # define LIMITE_ORACIONES 3
 typedef char t_oraciones[LIMITE_ORACIONES][MAX_CHAR];
+typedef char t_oracion[MAX_CHAR];
 typedef char t_subcadena[MAX_CHAR];
 
 void cargar_oraciones(t_oraciones oraciones)
 {
     int i;
     for (i = 0; i < LIMITE_ORACIONES; i++){
-        printf("Oracion %i", i+1);
+        printf("Oracion %i: ", i+1);
         fgets(oraciones[i], MAX_CHAR, stdin);
         oraciones[i][strlen(oraciones[i]) - 1] = '\0';
     }
@@ -49,7 +50,7 @@ void ingreso_subcadena(t_subcadena subcadena)
     subcadena[strlen(subcadena) - 1] = '\0';
 }
 
-bool esta_subcadena(t_subcadena oracion, t_subcadena subcadena)
+bool esta_subcadena(t_oracion oracion, t_subcadena subcadena)
 {
     return (strstr(oracion, subcadena) != NULL);
 }
@@ -59,7 +60,7 @@ void informar_estado_subcadena(t_oraciones oraciones, t_subcadena subcadena)
     int i;
     for (i = 0; i < LIMITE_ORACIONES; i++) {
         if (esta_subcadena(oraciones[i], subcadena))
-            printf("La subcadena ('%s') esta en la oracion ('%s')\n", subcadena, oraciones[i]);
+            printf("\nLa subcadena ('%s') esta en la oracion ('%s\n')", subcadena, oraciones[i]);
         else 
             printf("La subcadena no se encuentra en la oracion");
     }
@@ -68,7 +69,7 @@ void informar_estado_subcadena(t_oraciones oraciones, t_subcadena subcadena)
 
 void main() {
     t_oraciones oraciones;
-    t_oraciones mas_larga;
+    t_oracion mas_larga;
     t_subcadena subcadena;
     bool esta_subcadena;
 
@@ -79,9 +80,10 @@ void main() {
     printf("%s", mas_larga);
 
     printf("\n---HAY AL MENOS 2 ORACIONES IGUALES?---\n");
-    printf("%d", hay_dos_iguales(oraciones));
+    printf("%d\n", hay_dos_iguales(oraciones));
 
-    printf("\n--ESTA LA SUBCADENA EN ALGUNA ORACION. SI ES ASI, EN CUAL?---\n");
-    donde_esta_subcadena(oraciones, subcadena, &esta_subcadena);
+    ingreso_subcadena(subcadena);
+    printf("\n--ESTA LA SUBCADENA EN ALGUNA ORACION. SI ES ASI, EN CUALES?---\n");
+    informar_estado_subcadena(oraciones, subcadena);
     
 }
