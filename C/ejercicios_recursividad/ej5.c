@@ -5,7 +5,7 @@ typedef int t_vec[MAX];
 int mayor_vector(t_vec vec, int ml)
 {
     int mayor;
-    if (ml == 0)
+    if (ml == 1)
         return vec[0];
 
     mayor = mayor_vector(vec, ml-1);

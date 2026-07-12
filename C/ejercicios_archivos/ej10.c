@@ -39,7 +39,7 @@ void listar_datos_curso(FILE *alumnos)
         if (alumno.anio != anio_actual || alumno.division != division_actual) {
             anio_actual = alumno.anio;
             division_actual = division_actual;
-            printf("--AÑO %i | DIVISION %i--", anio_actual, division_actual);
+            printf("\n--AÑO %i | DIVISION %i--\n", anio_actual, division_actual);
         }
         printf("Nombre: %s | Promedio: %.2f", alumno.nombre, alumno.promedio_gral);
         
@@ -60,15 +60,14 @@ void cargar_datos_cursos(FILE *alumnos, FILE *cursos)
 
     while(!feof(alumnos)) {
         if (alumno.anio != anio_actual || alumno.division != division_actual) {
-            anio_actual = alumno.anio;
-            division_actual = alumno.division;
-
             if (cantidad_alumnos > 0) {
                 fwrite(&anio_actual, sizeof(int), 1, cursos);
                 fwrite(&division_actual, sizeof(int), 1, cursos);
                 fwrite(&cantidad_alumnos, sizeof(int), 1, cursos);
             }
 
+            anio_actual = alumno.anio; //CAMBIO DE AÑO
+            division_actual = alumno.division; //CAMBIO DE DIVISION
             cantidad_alumnos = 0;
         }
         cantidad_alumnos++;

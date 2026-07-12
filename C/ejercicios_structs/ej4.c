@@ -19,6 +19,12 @@ typedef struct {
     int cantidad_vendida_por_venta;
 } t_venta;
 
+typedef struct {
+    t_stock stock;
+    t_producto producto;
+    t_venta venta;
+}t_alimentos;
+
 void cargar_tablas(t_stock stock[TAMANIO], t_venta ventas[TAMANIO],
                    t_producto productos[TAMANIO], int *ml)
 {
@@ -73,7 +79,7 @@ void generar_lista_faltantes_y_eliminarlos (t_stock stock[TAMANIO], t_producto p
 {
     int i, destino;
     *mlf = destino = 0;
-    for (i = 0; i < *mlp; i--) {
+    for (i = 0; i < *mlp; i++) {
         if (stock[i].cantidad_en_stock == 0) {
             faltantes[*mlf] = productos[i];
             (*mlf)++;

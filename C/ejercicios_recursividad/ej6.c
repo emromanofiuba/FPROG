@@ -11,7 +11,7 @@ int pedir_entero()
 
 int invertir(int num, int invertido)
 {
-    if (num <= 0)
+    if (num == 0)
         return invertido;
     else {
         invertido = invertido * 10 + (num % 10);

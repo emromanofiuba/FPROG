@@ -12,11 +12,16 @@ int pedir_entero()
 
 bool es_binario(int num)
 {
-    if (num % 10 != 0 && num % 10 != 1)
-        return false;
-    if (num == 0)
+   bool binario;
+   binario = (num % 10 == 0 || num % 10 == 1);
+
+   if (num == 0)
         return true;
-    return es_binario(num / 10);
+   else if (!binario)
+        return false;
+   return es_binario(num / 10);
+    
+
 }
 
 int main() {

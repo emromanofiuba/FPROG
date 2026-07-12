@@ -11,9 +11,6 @@ int pedir_entero()
 
 int sumar_digitos(int num)
 {
-    if (num < 0)
-        num = -num; //VALOR ABSOLUTO
-
     if (num == 0)
         return 0;
     else {

@@ -6,21 +6,21 @@ void copiar_sin_espacios_superfluos(FILE *oracion_espacios, FILE *oracion_sin)
     char caracter;
     bool anterior_fue_espacio = true;
     
-    fread(caracter, sizeof(char), 1, oracion_espacios);
-    while(!feof(oracion_espacios)) {
+    fscanf(oracion_espacios, "%c", &caracter);
+    while(feof(oracion_espacios) == 0) {
         if (caracter != ' ' || !anterior_fue_espacio)
-            fwrite(caracter, sizeof(char), 1, oracion_sin);
+            fprintf(oracion_sin, "%c", &caracter);
         
         anterior_fue_espacio = (caracter == ' ');
-        fread(caracter, sizeof(char), 1, oracion_espacios);
+        fscanf(oracion_espacios, "%c", &caracter);
     }
 }
 
 int main(void) {
     FILE *oracion_espacios, *oracion_sin;
 
-    oracion_espacios = fopen("oracion_espacios.txt", "r");
-    oracion_sin = fopen("oracion_sin.txt", "w");
+    oracion_espacios = fopen("oracion_espacios.txt", "rt");
+    oracion_sin = fopen("oracion_sin.txt", "wt");
 
     if (oracion_espacios == NULL || oracion_sin == NULL)
         printf("No se pudieron abrir los archivos");

@@ -1,7 +1,7 @@
 # include <stdio.h>
 
 
-void procesar_comparar_cargar(FILE *enteros_1, FILE *enteros_2, FILE *enteros_ordenados)
+void mergear_enteros(FILE *enteros_1, FILE *enteros_2, FILE *enteros_ordenados)
 {
     int numero_1, numero_2;
     fread(&numero_1, sizeof(int), 1, enteros_1);
@@ -43,7 +43,7 @@ void main() {
     else if (enteros_ordenados == NULL)
         printf("No se pudo abrir enteros_ordenados");
     else {
-        procesar_comparar_cargar(enteros_1, enteros_2, enteros_ordenados);
+        mergear_enteros(enteros_1, enteros_2, enteros_ordenados);
         fclose(enteros_1);
         fclose(enteros_2);
         fclose(enteros_ordenados);
