@@ -1,41 +1,34 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX_CHAR 30
+#define MAX_CHAR 50
 typedef char t_cadena[MAX_CHAR];
 
-
-void borrar_blancos(t_cadena cadena)
+void invertir_cadena(t_cadena cadena, t_cadena cadena_inv)
 {
-    int i, destino;
-    destino = 0;
-    for (i = 0; i < strlen(cadena); i++) {
+    int i, nueva_pos, largo;
+    largo = strlen(cadena);
+    nueva_pos = 0;
+
+    for (i = largo - 1; i >= 0; i--) {
         if (cadena[i] != ' ') {
-            cadena[destino] = cadena[i];
-            destino++;
+            cadena_inv[nueva_pos] = cadena[i];
+            nueva_pos++;
         }
     }
-}
-
-void invertir_cadena(t_cadena cadena)
-{
-    int i, largo;
-    char aux;
-    largo = strlen(cadena);
-    for (i = 0; i < largo / 2; i++) {
-            aux = cadena[i];
-            cadena[i] = cadena[largo-1-i];
-            cadena[largo-1-i] = aux;
-        }
-    cadena[largo] = '\0';
+    cadena_inv[nueva_pos] = '\0';
 }
 
 
 int main() {
    
-    t_cadena cadena = "Hola, me llamo Ana";
-    borrar_blancos(cadena);
-    invertir_cadena(cadena);
-    printf("%s\n", cadena);
+    t_cadena cadena, cadena_inv;
+
+    printf("Cadena: ");
+    fgets(cadena, MAX_CHAR, stdin);
+    cadena[strcspn(cadena, "\n")] = '\0';
+
+    invertir_cadena(cadena, cadena_inv);
+    printf("%s\n", cadena_inv);
 
     return 0;
 }

@@ -38,12 +38,12 @@ bool validar_clave(char cadena[])
     int i;
     bool es_valida;
 
-    i = 0;
+    i = 1;
     es_valida = false;
 
     if (es_cadena_numerica(cadena))
-        while ((cadena[i+1] != '\0') && (!es_valida)) {
-            if (cadena[i] != cadena[i+1]) 
+        while ((cadena[i] != '\0') && (!es_valida)) {
+            if (cadena[i] != cadena[i-1]) 
                 es_valida = true;
             i++;
         }

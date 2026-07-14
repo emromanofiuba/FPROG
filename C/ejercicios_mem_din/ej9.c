@@ -4,23 +4,36 @@
 #define MAX_CHAR 21
 typedef char t_cadena[MAX_CHAR];
 
-void ingreso_palabra(t_cadena palabra)
+void carga_palabra(t_cadena cadena_aux)
 {
     printf("Ingrese una palabra: ");
-    fgets(palabra, MAX_CHAR, stdin);
-    palabra[strcspn(palabra, "\n")] = '\0';
+    fgets(cadena_aux, MAX_CHAR, stdin);
+    cadena_aux[strcspn(cadena_aux, "\n")] = '\0';
 }
 
-void almacenar_palabra(t_cadena palabra)
+char* reservar_memoria(t_cadena cadena_aux)
 {
-    t_cadena *cadena = NULL;
-    cadena = malloc(strlen(cadena) * sizeof(char) + 1);
-    
+    char* cadena;
+    cadena = malloc(strlen(cadena_aux) * sizeof(char)+ 1);
+
+    return cadena;
+}
+
+int main() {
+    t_cadena cadena_aux;
+    char* cadena;
+
+    carga_palabra(cadena_aux);
+    cadena = reservar_memoria(cadena_aux);
+
     if (cadena == NULL)
-        printf("Sos un rata. Comprate mas memoria\n");
+        printf("No se pudo almacenar la palabra ingresada. Memoria no reservada\n");
     else {
-        ingreso_palabra(palabra);
+        strcpy(cadena, cadena_aux);
+        printf("Memoria reservada con exito. Palabra almacenada\n");
         free(cadena);
     }
+
+    return 0;
 }
 

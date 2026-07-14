@@ -1,44 +1,54 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#define MAX_CHAR 31
 typedef char* t_palabra;
 typedef t_palabra *t_vec;
 
-void ingreso_palabras(t_vec *palabras, int *n)
+void cargar_palabras(t_vec palabras, int *n)
 {
-    *n = 0;
+    bool seguir;
     char c;
-    printf("Desea ingresar una palabra (s o n): ");
-    scanf("%c", &c);
-    while (c == 's') {
-        printf("Palabra: ");
-        scanf("%s", palabras[*n]);
-        (*n)++;
+    char palabra[MAX_CHAR];
+    t_vec aux;
 
-        printf("Desea ingresar otra palabra (s o n): ");
-        scanf("%c", &c);
+    printf("Desea ingresar una palabra (s o n): ");
+    scanf(" %c", &c);
+    seguir = true;
+    *n = 0;
+    palabras = NULL;
+
+    while (seguir && c == 's') {
+        printf("Palabra: ");
+        scanf("%s", palabra);
+
+        aux = realloc(palabras, (*n + 1) * sizeof(t_palabra));
+        if (aux == NULL) {
+            printf("No se pudo expandir la lista de palabras\n");
+            seguir = false;
+        }
+        else {
+            palabras[*n] = malloc(strlen(palabras[*n]) * sizeof(char) + 1);
+            if (palabras[*n] == NULL) {
+                printf("No se pudo reservar el espacio para la palabra\n");
+            }
+            else {
+                strcpy(palabras[*n], palabra);
+                (*n)++;
+            }
+            printf("Desea ingresar otra palabra (s o n): ");
+            scanf(" %c", &c);
+        }
     }
 }
 
-
-void mostrar_palabras(t_vec *palabras, int n)
+void liberar_memoria(t_vec palabras, int n)
 {
     int i;
     for (i = 0; i < n; i++) {
-        printf("Palabra %i: %s\n", i+1, palabras[i]);
+        free(palabras[i]);
     }
-}
-
-void almacenar_palabras(t_vec *palabras, int n)
-{
-    ingreso_palabras(palabras, &n);
-    palabras = malloc(n * sizeof(t_palabra));
-
-    if (palabras == NULL)
-        printf("No se pudo reservar la memoria");
-    else {
-        mostrar_palabras(palabras, n);
-        free(palabras);
-    }
+    free(palabras);
 }
 

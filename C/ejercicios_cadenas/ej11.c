@@ -18,18 +18,17 @@ void cargar_palabras(t_palabras palabras, int *ml)
 {
     char ingreso;
     *ml = 0;
-    
+
     printf("Desea ingresar una palabra? (s/n): ");
     scanf(" %c", &ingreso);
 
     while (*ml < LIMITE_PAL && ingreso == 's') {
         printf("Ingrese una palabra: ");
-        fgets(palabras[*ml], MAX_CHAR, stdin);
-        palabras[*ml][strcspn(palabras[*ml], "\n")] = '\0';
+        scanf("%s", palabras[*ml]);
+        (*ml)++;
 
         printf("Desea ingresar otra palabra? (s/n): ");
         scanf(" %c", &ingreso);
-        (*ml)++;
     }
 }
 
@@ -53,8 +52,7 @@ void palabra_mas_larga(t_palabras palabras, int ml, t_palabra mas_larga)
 void pedir_palabra(t_palabra palabra)
 {
     printf("\nQue palabra desea buscar: ");
-    fgets(palabra, MAX_CHAR, stdin);
-    palabra[strcspn(palabra, "\n")] = '\0';
+    scanf("%s", palabra);
 }
 
 void ordenar_palabras(t_palabras palabras, int ml)
@@ -74,33 +72,19 @@ void ordenar_palabras(t_palabras palabras, int ml)
     }
 }
 
-bool buscar_palabra(t_palabras palabras, int ml, t_palabra palabra)
+bool esta_palabra(t_palabras palabras, int ml, t_palabra palabra)
 {
-    int inicio, fin, centro;
-    int cmp;
-    bool terminado;
+    int i;
+    bool encontrada;
+    i = 0;
+    encontrada = false;
 
-    inicio = 0;
-    fin = ml - 1;
-    cmp = strcmp(palabra, palabras[centro]);
-    terminado = false;
-
-    if (strcmp(palabra, palabras[inicio]) < 0 || strcmp(palabra, palabras[fin]) > 0)
-        terminado = true;
-    else {
-        while (!terminado) {
-            centro = inicio + ((fin - inicio) / 2);
-            if (cmp == 0)
-                terminado = true;
-            else 
-                if (cmp < 0) 
-                    fin = centro - 1;
-                else 
-                    inicio = centro + 1;
-        }
+    while (i < ml && !encontrada) {
+        if (strstr(palabras[i], palabra) != NULL)
+            encontrada = true;
+        i++;
     }
-
-    return terminado;
+    return encontrada;
 }
 
 
@@ -115,11 +99,12 @@ void main()
     mostrar_palabras(palabras, ml);
 
     palabra_mas_larga(palabras, ml, mas_larga);
+    printf("\n--PALABRA MAS LARGA-- %s\n", mas_larga);
 
-    ordenar_palabras(palabras, ml);
+    //ordenar_palabras(palabras, ml);
 
     pedir_palabra(palabra);
 
-    buscar_palabra(palabras, ml, palabra);
+    printf("La palabra (%s) esta entre las ingresadas: %d\n", palabra, esta_palabra(palabras, ml, palabra));  
 
 }

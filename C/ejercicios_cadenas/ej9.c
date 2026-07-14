@@ -15,6 +15,7 @@ void plural(t_cadena sustantivo)
     int largo;
     char ultima_letra;
     bool es_ult_voc_no_acentuada;
+    
     largo = strlen(sustantivo);
     ultima_letra = sustantivo[largo-1];
     es_ult_voc_no_acentuada = (ultima_letra == 'a' || ultima_letra == 'e' || ultima_letra == 'i' || ultima_letra == 'o' || ultima_letra == 'u');
