@@ -18,9 +18,10 @@ float potencia(int a, int b)
     return a * potencia(a, b-1);
 }
 
-int main(void)
+int main()
 {
     int a, b;
     base_exponente(&a, &b);
     printf("%i^%i = %.2f\n", a, b, potencia(a, b));
+    return 0;
 }

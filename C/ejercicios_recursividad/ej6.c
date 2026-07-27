@@ -9,6 +9,7 @@ int pedir_entero()
     return num;
 }
 
+
 int invertir(int num, int invertido)
 {
     if (num == 0)
@@ -19,7 +20,7 @@ int invertir(int num, int invertido)
     }
 }
 
-int main(void) {
+int main() {
     int num;
     num = pedir_entero();
     printf("\nNumero ingresado: %i\n", num);

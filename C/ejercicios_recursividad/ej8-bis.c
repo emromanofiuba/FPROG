@@ -23,9 +23,11 @@ bool es_capicua(int num, int divisor) //RECORRO Y EVALUO LOS DIGITOS DE IZQUIERD
     }
 }
 
-int main(void) {
+int main() {
     int divisor;
     divisor = divisor_extremo(12121);
 
     printf("es capicua: %d\n", es_capicua(12121, divisor));
+
+    return 0;
 }

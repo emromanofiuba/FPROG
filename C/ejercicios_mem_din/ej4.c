@@ -6,21 +6,21 @@ typedef struct {
     char apellido[30];
 }t_alumno;
 
-void ingreso_alumnos(t_alumno *alumnos)
+void ingreso_alumnos(t_alumno *alumno)
 {
     printf("Ingresa padron porfa: ");
-    scanf("%d", &alumnos->padron);
+    scanf("%d", &alumno->padron);
 
     printf("Ingresa el nombre piorfa: ");
-    scanf("%s", alumnos->nombre);
+    scanf("%s", alumno->nombre);
 
     printf("Ingresa el apellido piorfa: ");
-    scanf("%s", alumnos->apellido);
+    scanf("%s", alumno->apellido);
 }
 
-void mostrar_alumnos(t_alumno *alumnos)
+void mostrar_alumnos(t_alumno *alumno)
 {
-    printf("Padron: %d | Nombre: %s | Apellido: %s\n", alumnos->padron, alumnos->nombre, alumnos->apellido);
+    printf("Padron: %d | Nombre: %s | Apellido: %s\n", alumno->padron, alumno->nombre, alumno->apellido);
 }
 
 int main() {

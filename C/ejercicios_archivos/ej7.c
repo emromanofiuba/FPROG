@@ -24,11 +24,9 @@ int main(void) {
 
     if (oracion_espacios == NULL || oracion_sin == NULL)
         printf("No se pudieron abrir los archivos");
-    else 
+    else {
         copiar_sin_espacios_superfluos(oracion_espacios, oracion_sin);
-
-    if (oracion_espacios != NULL)
         fclose(oracion_espacios);
-    if (oracion_sin != NULL)
         fclose(oracion_sin);
+    }
 }

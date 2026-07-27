@@ -26,63 +26,44 @@ int viajes_cordoba(FILE *viajes)
     return cantidad;
 }
 
-t_viaje camion_mas_viajero(FILE *viajes)
+void cerrar_camion(FILE *datos_viaje, int cant_viajes, float peso_total, int max_viajes, t_patente patente, t_patente mas_viajera)
 {
-    t_viaje viaje;
-    t_viaje mas_viajero;
-    t_viaje grupo_actual;
-    int cant_viajes;
-    int max_viajes;
+  fwrite(patente, sizeof(t_patente), 1, datos_viaje);
+  fwrite(&peso_total, sizeof(float), 1, datos_viaje);
 
-    cant_viajes = 0;
-    max_viajes = 0;
-
-    fread(&viaje, sizeof(t_viaje), 1, viajes);
-    mas_viajero = viaje;
-    grupo_actual = viaje;
-
-    while (!feof(viajes)) {
-        if (strcmp(viaje.patente, grupo_actual.patente)!= 0) {
-            if (cant_viajes > max_viajes) {
-                max_viajes = cant_viajes; //SE DESPIDE AL QUE SE VA
-                mas_viajero = grupo_actual;
-            }
-            grupo_actual = viaje;  //SE SALUDA AL QUE LLEGA
-            cant_viajes = 0;
-        }
-        cant_viajes++;
-        fread(&viaje, sizeof(t_viaje), 1, viajes);
-    }
-    if (cant_viajes > max_viajes) {
-            max_viajes = cant_viajes;
-            mas_viajero = grupo_actual;
-    }
-
-    return mas_viajero;
+  if (cant_viajes > max_viajes) {
+    max_viajes = cant_viajes;
+    mas_viajera = patente;
+  }
 }
 
-void grabar_datos(FILE *viajes, FILE *datos_viaje)
+void procesar_camion(FILE *viajes, FILE *datos_viaje)
 {
     t_viaje viaje;
-    t_patente patente_actual;
+    t_patente patente_actual, patente_mas_viajera;
     float peso_total;
-    strcpy(patente_actual, "-1");
+    int cant_viajes, max_viajes;
+
+    strcpy(patente_actual, "0");
     peso_total = 0.0;
+    cant_viajes = max_viajes = 0;
 
     fread(&viaje, sizeof(t_viaje), 1, viajes);
     while (!feof(viajes)) {
         if (strcmp(viaje.patente, patente_actual) != 0) {
             if (peso_total > 0) {
-                fwrite(patente_actual, sizeof(t_patente), 1, datos_viaje); //DESPIDO
-                fwrite(&peso_total, sizeof(float), 1, datos_viaje);
+                cerrar_camion(datos_viaje, cant_viajes, max_viajes, peso_total, patente_actual, patente_mas_viajera);
             }
             strcpy(patente_actual, viaje.patente); //RECIBO
             peso_total = 0.0;
+            cant_viajes = 0;
         }
         peso_total += viaje.peso;
+        cant_viajes++;
+
         fread(&viaje, sizeof(t_viaje), 1, viajes);
     }
-    fwrite(patente_actual, sizeof(t_patente), 1, datos_viaje);
-    fwrite(&peso_total, sizeof(float), 1, datos_viaje);
+    if (peso_total > 0) 
+        cerrar_camion(datos_viaje, cant_viajes, max_viajes, peso_total, patente_actual, patente_mas_viajera);
 }
 

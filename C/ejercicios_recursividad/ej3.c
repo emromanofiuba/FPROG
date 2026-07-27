@@ -23,7 +23,7 @@ int busqueda_binaria(t_vec vec, int num, int inf, int sup)
 void main() {
     t_vec vec = {1, 2, 3, 4, 5, 6};
     int ml = 6;
-    int buscado = 5;
+    int buscado = 7;
     int posicion = busqueda_binaria(vec, buscado, 0, ml-1);
     printf("Esta el %i, en que posicion = %d\n", buscado, posicion);
 }

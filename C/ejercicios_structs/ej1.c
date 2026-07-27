@@ -21,9 +21,11 @@ float sueldo_basico;
 void cumpleanieros_febrero(t_empleado empleados[TAMANIO], int ml)
 {
     int i;
+    int mes_actual;
+    mes_actual = (FECHA_ACTUAL / 100) % 100;
 
     for (i = 0; i < ml; i++)
-        if (empleados[i].fecha_nacimiento.mes == 2) {
+        if (empleados[i].fecha_nacimiento.mes == mes_actual) {
             printf("Nombre: %s | Apellido: %s", empleados[i].nombre, empleados[i].apellido);
             printf("\n");
         }
